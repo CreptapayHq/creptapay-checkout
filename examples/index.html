@@ -1,0 +1,55 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>CreptaPay SDK example</title>
+  <style>
+    body { font-family: system-ui, sans-serif; max-width: 560px; margin: 40px auto; padding: 0 16px; }
+    button { padding: 10px 16px; margin: 4px 8px 4px 0; cursor: pointer; }
+    input { padding: 8px; width: 100%; box-sizing: border-box; margin-bottom: 12px; }
+    pre { background: #f4f4f5; padding: 12px; white-space: pre-wrap; font-size: 13px; }
+  </style>
+</head>
+<body>
+  <h1>CreptaPay SDK example</h1>
+  <label>Public key <input id="key" placeholder="pk_test_..." /></label>
+  <label>Amount (USD) <input id="amount" type="number" value="1" step="0.01" /></label>
+  <button data-mode="popup">Pay (popup)</button>
+  <button data-mode="inline">Pay (inline)</button>
+  <button data-mode="redirect">Pay (redirect)</button>
+  <div id="pay" style="margin-top:16px"></div>
+  <pre id="log"></pre>
+
+  <!-- After publishing: https://unpkg.com/@creptapay/checkout@0.1.0/dist/creptapay.js -->
+  <script src="../dist/creptapay.js"></script>
+  <script>
+    const log = (...a) => (document.getElementById("log").textContent += a.map(x => typeof x === "string" ? x : JSON.stringify(x)).join(" ") + "\n");
+    document.querySelectorAll("button[data-mode]").forEach((btn) => {
+      btn.onclick = async () => {
+        try {
+          const crepta = new CreptaPay({ publicKey: document.getElementById("key").value.trim() });
+          await crepta.checkout({
+            mode: btn.dataset.mode,
+            container: "#pay",
+            amount: Number(document.getElementById("amount").value),
+            description: "SDK test",
+            customer: { email: "test@example.com", first_name: "Test", last_name: "Buyer" },
+            metadata: { order_id: "demo-" + Date.now() },
+            redirectUrl: location.href.split("?")[0],
+            onLoad: () => log("loaded"),
+            onStatusChange: (r) => log("status", r.status),
+            onSuccess: (r) => log("SUCCESS", r),
+            onExpired: () => log("expired"),
+            onClose: (r) => log("closed", r),
+          });
+        } catch (e) {
+          log("error:", e.message);
+        }
+      };
+    });
+    const q = new URLSearchParams(location.search);
+    if (q.get("reference")) log("returned from checkout:", { reference: q.get("reference"), status: q.get("status") });
+  </script>
+</body>
+</html>
