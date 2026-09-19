@@ -1,5 +1,11 @@
 # Changelog
 
+## 0.1.1
+
+- Published from its own repository: github.com/CreptapayHq/creptapay-checkout.
+- Adds the LICENSE file to the published package.
+- No code changes from 0.1.0.
+
 ## 0.1.0
 
 - First release.

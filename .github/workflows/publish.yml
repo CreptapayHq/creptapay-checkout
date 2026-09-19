@@ -19,8 +19,8 @@ jobs:
         with:
           node-version: 20
           registry-url: https://registry.npmjs.org
-      # Switch to `npm ci` once package-lock.json is committed
-      - run: npm install --no-audit --no-fund
+          cache: npm
+      - run: npm ci
       - name: Check tag matches package.json version
         run: |
           TAG="${GITHUB_REF_NAME#v}"
