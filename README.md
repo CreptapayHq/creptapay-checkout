@@ -9,8 +9,10 @@ npm install @creptapay/checkout
 Or use a `<script>` tag:
 
 ```html
-<script src="https://unpkg.com/@creptapay/checkout@0.1.0/dist/creptapay.js"></script>
+<script src="https://unpkg.com/@creptapay/checkout@0.1/dist/creptapay.js"></script>
 ```
+
+`@0.1` loads the newest 0.1.x release. To lock one exact version, use it in the URL, e.g. `@creptapay/checkout@0.1.2`.
 
 ## Quick start
 
@@ -128,7 +130,7 @@ Errors are `CreptaPayError` with `.message` and `.status`.
 ## Script tag
 
 ```html
-<script src="https://unpkg.com/@creptapay/checkout@0.1.0/dist/creptapay.js"></script>
+<script src="https://unpkg.com/@creptapay/checkout@0.1/dist/creptapay.js"></script>
 <script>
   const crepta = new CreptaPay({ publicKey: "pk_test_..." });
   document.querySelector("#buy").onclick = () =>
@@ -151,16 +153,6 @@ npm test
 ```
 
 Try it in a browser: open `examples/index.html` and enter your `pk_test_` key.
-
-### Releasing
-
-1. Update `CHANGELOG.md`.
-2. Run `npm version patch` (or `minor` or `major`). This updates `package.json` and creates a `vX.Y.Z` tag.
-3. Run `git push --follow-tags`. The **Publish to npm** workflow builds, tests and publishes.
-
-The workflow needs an `NPM_TOKEN` repository secret: a granular access token with read and write access to `@creptapay` and **Bypass 2FA** enabled.
-
-To publish by hand instead, run `npm publish --otp=<code>`.
 
 ## License
 

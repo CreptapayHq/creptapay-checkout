@@ -1,5 +1,9 @@
 # Changelog
 
+## 0.1.2
+
+- README: script-tag links use `@0.1` (newest 0.1.x) instead of a fixed version.
+
 ## 0.1.1
 
 - Published from its own repository: github.com/CreptapayHq/creptapay-checkout.

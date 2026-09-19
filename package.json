@@ -1,6 +1,6 @@
 {
     "name": "@creptapay/checkout",
-    "version": "0.1.1",
+    "version": "0.1.2",
     "description": "Accept stablecoin payments with CreptaPay: start a payment, then redirect to the hosted checkout or embed it in an iframe.",
     "license": "MIT",
     "author": "CreptaPay",
